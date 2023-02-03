@@ -1,13 +1,15 @@
 #bin/bash
 
-MANUFACTURER=$(/opt/puppetlabs/bin/facter dmi.manufacturer)
-MODEL=$(/opt/puppetlabs/bin/facter dmi.product.name)
+PATH=$PATH:/opt/puppetlabs/bin
+
+MANUFACTURER=$(facter dmi.manufacturer)
+MODEL=$(facter dmi.product.name)
 LAST_USER=$(last -n 1 -R -w | head -n1 | cut -d' ' -f1)
 #LAST_TIME=$(last -n 1 -R -w --time-format iso | head -n1 | tr -s ' ' | cut -d' ' -f3)
 LAST_TIME=$(lastlog -u $LAST_USER | tail -n1 | tr -s ' ' | cut -d' ' -f4-)
-SERIAL=$(/opt/puppetlabs/bin/facter dmi.product.serial_number)
-OS=$(/opt/puppetlabs/bin/facter os.name)
-OS_VER=$(/opt/puppetlabs/bin/facter os.release.full)
+SERIAL=$(facter dmi.product.serial_number)
+OS=$(facter os.name)
+OS_VER=$(facter os.release.full)
 LAST_LOGIN=$(date -d"$LAST_TIME" +"%m/%d/%Y %H:%M:%S")
 
 if [ "$MODEL" == "VMware Virtual Platform" ]; then
