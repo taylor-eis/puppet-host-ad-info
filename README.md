@@ -1,0 +1,1 @@
+# puppet-host-ad-info
