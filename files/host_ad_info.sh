@@ -4,7 +4,7 @@ PATH=$PATH:/opt/puppetlabs/bin
 
 MANUFACTURER=$(facter dmi.manufacturer)
 MODEL=$(facter dmi.product.name)
-LAST_USER=$(last -n 1 -R -w | head -n1 | cut -d' ' -f1)
+LAST_USER=$(last -R -w | grep -v katelloservice | head -n1 | cut -d' ' -f1)
 #LAST_TIME=$(last -n 1 -R -w --time-format iso | head -n1 | tr -s ' ' | cut -d' ' -f3)
 LAST_TIME=$(lastlog -u $LAST_USER | tail -n1 | tr -s ' ' | cut -d' ' -f4-)
 SERIAL=$(facter dmi.product.serial_number)
