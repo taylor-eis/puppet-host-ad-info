@@ -10,4 +10,7 @@ class host_ad_info {
     hour => 1,
     minute => 0,
   }
+  package { "openldap-clients":
+    ensure => "present",
+  }
 }
